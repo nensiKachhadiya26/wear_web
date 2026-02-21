@@ -9,6 +9,7 @@ export const ProductList = () => {
         <h2>kids</h2>
         <h2>home</h2>
         <h2>beauty</h2>
+        <h2>more</h2>
     </div>
   )
 }
