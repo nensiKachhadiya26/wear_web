@@ -7,6 +7,8 @@ export const ProductList = () => {
         <h2>men</h2>
         <h2>women</h2>
         <h2>kids</h2>
+        <h2>home</h2>
+        <h2>beauty</h2>
     </div>
   )
 }
