@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  FaBoxOpen,
-  FaShoppingCart,
-  FaStar,
-  FaComments,
-  FaUserCircle,
-} from "react-icons/fa";
+import {FaBoxOpen,FaShoppingCart,FaStar,FaComments,FaUserCircle,} from "react-icons/fa";
 
 export const SellerNavbar = () => {
   return (

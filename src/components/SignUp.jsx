@@ -1,12 +1,26 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
+import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+    const navigate = useNavigate();
+        const submitHandler = async (data) => {
+          try {
+            const res = await axios.post("https://node5.onrender.com/user/user/",data);
 
-  const{register,handleSubmit,formState:{errors}}=useForm({mode:"all"})
-      const submitHandler = (data) => {
-          console.log(data)
-      }
+            if (res.status === 200 || res.status === 201) {
+              toast.success("Registration Successful..");
+              navigate("/login");
+            }
+
+          } catch (err) {
+            console.log("error...", err);
+            toast.error("Registration Failed..");
+          }
+      };
 
     
       const validationSchema = {
@@ -171,7 +185,7 @@ export const SignUp = () => {
         <p className="text-sm text-center text-gray-600 mt-4">
           Already have an account?
           <span className="text-purple-600 cursor-pointer ml-1">
-            Login
+             <Link to="/login">Login</Link>
           </span>
         </p>
 

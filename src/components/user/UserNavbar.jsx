@@ -1,8 +1,11 @@
 import React from 'react'
 import { FaUser, FaHeart, FaShoppingBag, FaSearch } from "react-icons/fa";
+import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const UserNavbar = () => {
   return (
+    <div>
       <nav className="bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
 
@@ -18,6 +21,12 @@ export const UserNavbar = () => {
             <li className="hover:text-[#FF3F6C] cursor-pointer">Kids</li>
             <li className="hover:text-[#FF3F6C] cursor-pointer">Home</li>
             <li className="hover:text-[#FF3F6C] cursor-pointer">Beauty</li>
+            <li><Link to="/user/getapidemo" className="hover:text-[#FF3F6C] cursor-pointer">
+                GETAPIDEMO1
+              </Link></li>
+              <li><Link to="/user/useeffectdemo" className="hover:text-[#FF3F6C] cursor-pointer">
+                UseEffectDemo
+              </Link></li>
           </ul>
         </div>
 
@@ -52,5 +61,7 @@ export const UserNavbar = () => {
         </div>
       </div>
     </nav>
+    <Outlet/>
+    </div>
   )
 }

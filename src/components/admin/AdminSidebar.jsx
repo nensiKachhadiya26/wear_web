@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  FaTachometerAlt,
-  FaUsers,
-  FaStore,
-  FaCheckCircle,
-  FaShoppingCart,
-  FaStar,
-} from "react-icons/fa";
+import {FaTachometerAlt,FaUsers,FaStore,FaCheckCircle,FaShoppingCart,FaStar,} from "react-icons/fa";
 
 export const AdminSidebar = () => {
   return (

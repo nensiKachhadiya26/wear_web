@@ -4,6 +4,9 @@ import { SignUp } from "../components/SignUp";
 import { AdminSidebar } from "../components/admin/AdminSidebar";
 import { UserNavbar } from "../components/user/UserNavbar";
 import { SellerNavbar } from "../components/seller/SellerNavbar";
+import { ProductList } from "../components/user/ProductList";
+import { GetApiDemo1 } from "../components/user/GetApiDemo1";
+import { UseEffectDemo } from "../components/user/UseEffectDemo";
 
 
 const router = createBrowserRouter([
@@ -15,6 +18,11 @@ const router = createBrowserRouter([
     },
     {
         path:'/user',element:<UserNavbar/>,
+        children:[
+            // {path:'prolist', element:<ProductList/>},
+            {path:'getapidemo',element:<GetApiDemo1/>},
+            {path:'useeffectdemo', element:<UseEffectDemo/>},
+        ]
     },
     {
         path:'/seller', element:<SellerNavbar/>,

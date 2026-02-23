@@ -1,10 +1,32 @@
+import axios from 'axios'
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { toast } from "react-toastify";
+import { Link } from 'react-router-dom';
 
 export const LoginPage = () => {
+
+  const navigate = useNavigate()
   const{register,handleSubmit,formState:{errors}}=useForm({mode:"all"})
-    const submitHandler = (data) => {
-        console.log(data)
+
+
+    const submitHandler = async(data) => {
+        try{
+            const res = await axios.post("https://node5.onrender.com/user/login",data)
+            console.log("response..",res)
+            console.log("response data..",res.data)
+            if(res.status === 200 || res.status === 201){
+            //alert("login success")
+            toast.success("Login Success..")
+            //check role in api response..
+            navigate("/user")}
+          }catch(err){
+              console.log("error...",err);
+              //alert("login failed")
+              toast.error("Login Failed..")
+          }
+
     }
 
     const validationSchema = {
@@ -78,7 +100,7 @@ export const LoginPage = () => {
         <p className="text-sm text-center text-gray-600 mt-4">
           Don't have an account? 
           <span className="text-purple-600 cursor-pointer ml-1">
-           Sign Up
+           <Link to="/signup">Sign Up</Link>
           </span>
         </p>
 
