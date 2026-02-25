@@ -15,16 +15,18 @@ export const UserNavbar = () => {
             Wear Web
           </h1>
 
-          <ul className="hidden md:flex gap-6 font-medium text-gray-700">
+          {/* <ul className="hidden md:flex gap-6 font-medium text-gray-700">
             <li className="hover:text-[#FF3F6C] cursor-pointer">Men</li>
             <li className="hover:text-[#FF3F6C] cursor-pointer">Women</li>
             <li className="hover:text-[#FF3F6C] cursor-pointer">Kids</li>
             <li className="hover:text-[#FF3F6C] cursor-pointer">Home</li>
             <li className="hover:text-[#FF3F6C] cursor-pointer">Beauty</li>
+          </ul> */}
+          <ul className="hidden md:flex gap-2 font-medium text-gray-700">
             <li><Link to="/user/getapidemo" className="hover:text-[#FF3F6C] cursor-pointer">
                 GETAPIDEMO1
-              </Link></li>
-              <li><Link to="/user/useeffectdemo" className="hover:text-[#FF3F6C] cursor-pointer">
+              </Link></li><br></br>
+            <li><Link to="/user/useeffectdemo" className="hover:text-[#FF3F6C] cursor-pointer">
                 UseEffectDemo
               </Link></li>
           </ul>

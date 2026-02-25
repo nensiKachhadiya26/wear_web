@@ -57,7 +57,7 @@ export const LoginPage = () => {
     }
   return (
       <div className="min-h-screen flex items-center justify-center bg-[#FF3F6C]/10">      
-      <div className="bg-white p-8 rounded-2xl shadow-2xl w-96">
+     <div className="bg-white p-8 rounded-2xl shadow-2xl w-96">
         
       <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Login
