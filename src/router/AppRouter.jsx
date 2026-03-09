@@ -7,11 +7,13 @@ import { SellerNavbar } from "../components/seller/SellerNavbar";
 import { ProductList } from "../components/user/ProductList";
 import { GetApiDemo1 } from "../components/user/GetApiDemo1";
 import { UseEffectDemo } from "../components/user/UseEffectDemo";
+import { ResetPassword} from "../components/ResetPassword";
 
 
 const router = createBrowserRouter([
     {path:'/login' , element:<LoginPage/>},
     {path:'/signup',element:<SignUp/>},
+    {path:'/resetpassword',element:<ResetPassword/>},
     {
         path:'/admin', element:<AdminSidebar/>,
         

@@ -6,34 +6,84 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
+   const {register,handleSubmit,watch,formState: { errors }} = useForm();
+
     const navigate = useNavigate();
-        const submitHandler = async (data) => {
-          try {
-            const res = await axios.post("https://node5.onrender.com/user/user/",data);
+      //   const submitHandler = async (data) => {
+      //     try {
+      //       const res = await axios.post("https://node5.onrender.com/user/user/",data);
 
-            if (res.status === 200 || res.status === 201) {
-              toast.success("Registration Successful..");
-              navigate("/login");
-            }
+      //       if (res.status === 200 || res.status === 201) {
+      //         toast.success("Registration Successful..");
+      //         navigate("/login");
+      //       }
 
-          } catch (err) {
-            console.log("error...", err);
-            toast.error("Registration Failed..");
+      //     } catch (err) {
+      //       console.log("error...", err);
+      //       toast.error("Registration Failed..");
+      //     }
+      // };
+      const submitHandler = async(data)=>{
+        try{
+          const res = await axios.post("http://localhost:3000/user/register",data)
+          if(res.status==201){
+            toast.success("User registered successfully")
+            navigate("/login")
           }
-      };
+
+        }catch(err){
+          toast.error(err.response.data.message)
+        }
+      }
+      const onError = (errors) => {
+
+          if (errors.firstName) {
+            toast.error(errors.firstName.message)
+          }
+
+          else if (errors.lastName) {
+            toast.error(errors.lastName.message)
+          }
+
+          else if (errors.email) {
+            toast.error(errors.email.message)
+          }
+
+          else if (errors.password) {
+            toast.error(errors.password.message)
+          }
+}
 
     
       const validationSchema = {
-          nameValidator: {
+          firstNameValidator: {
               required: {
                 value: true,
-                message: "Full Name is required.."
+                message: "First Name is required.."
+              },
+              pattern: {
+                value: /^[A-Za-z]+$/,
+                message: "First Name must contain only letters"
               }
             },
-          emailValidator: {
+            lastNameValidator: {
+              required: {
+                value: true,
+                message: "Last Name is required.."
+              },
+              pattern: {
+                value: /^[A-Za-z]+$/,
+                message: "Last Name must contain only letters"
+              }
+            },
+            emailValidator: {
               required: {
                 value: true,
                 message: "Email is required.."
+              }, 
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter valid email"
               }
             },
           passwordValidator: {
@@ -45,29 +95,17 @@ export const SignUp = () => {
                 value: 8,
                 message: "Minimum 8 characters required.."
               },
+               maxLength: {
+                value: 16,
+                message: "Meximum 16 characters required.."
+              },
               pattern: {
                 value: /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%]).{8,}$/,
                 message:
                   "Password must contain Capital, Small, Number & Special character"
               }
-            },
-          contactValidator: {
-              required: {
-                value: true,
-                message: "Contact number is required.."
-              },
-              pattern: {
-                value: /^[6-9]{1}[0-9]{9}$/,
-                message: "Enter valid 10 digit mobile number"
-              }
-            },
-          genderValidator: {
-              required: {
-                value: true,
-                message: "Gender is required.."
-              }
             }
-          };
+          }
 
   return (
     // <div className="min-h-screen flex items-center justify-center bg-white">
@@ -78,23 +116,32 @@ export const SignUp = () => {
           Sign Up
         </h2>
 
-        <form className="space-y-5" onSubmit={handleSubmit(submitHandler)}>
+        <form className="space-y-5" onSubmit={handleSubmit(submitHandler,onError)}>
 
           {/* Full Name */}
           <div>
-            <label className="block text-gray-600 mb-2">Full Name</label>
+            <label className="block text-gray-600 mb-2">First Name</label>
             <input
               type="text"
-              placeholder="Enter your full name"
+              placeholder="First Name"
               className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3F6C]/10 
                focus:border-[#FF3F6C]"
-              {...register("fullname", validationSchema.nameValidator)}
+              {...register("firstName", validationSchema.firstNameValidator)}
             />
-            <p className="text-red-500 text-sm mt-1">
-              {errors.fullname?.message}
-            </p>
+            
           </div>
-
+          {/* last name*/}
+          <div>
+            <label className="block text-gray-600 mb-2">Last Name</label>
+            <input
+              type="text"
+              placeholder="Last Name"
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3F6C]/10 
+               focus:border-[#FF3F6C]"
+              {...register("lastName", validationSchema.lastNameValidator)}
+            />
+            
+          </div>
           {/* Email */}
           <div>
             <label className="block text-gray-600 mb-2">Email</label>
@@ -105,9 +152,7 @@ export const SignUp = () => {
                focus:border-[#FF3F6C]"
               {...register("email", validationSchema.emailValidator)}
             />
-            <p className="text-red-500 text-sm mt-1">
-              {errors.email?.message}
-            </p>
+            
           </div>
 
           {/* Password */}
@@ -120,58 +165,10 @@ export const SignUp = () => {
                focus:border-[#FF3F6C]"
               {...register("password", validationSchema.passwordValidator)}
             />
-            <p className="text-red-500 text-sm mt-1">
-              {errors.password?.message}
-            </p>
+            
           </div>
 
-          {/* Contact Number */}
-          <div>
-            <label className="block text-gray-600 mb-2">Contact Number</label>
-            <input
-              type="text"
-              placeholder="Enter mobile number"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3F6C]/10 
-               focus:border-[#FF3F6C]"
-              {...register("contact", validationSchema.contactValidator)}
-            />
-            <p className="text-red-500 text-sm mt-1">
-              {errors.contact?.message}
-            </p>
-          </div>
-
-          {/* Gender */}
-          <div>
-            <label className="block text-gray-600 mb-2">Gender</label>
-
-            <div className="flex gap-6">
-              {/* Male */}
-                <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      value="Male"
-                      {...register("gender", validationSchema.genderValidator)}
-                      className="accent-[#FF3F6C]"
-                    />
-                    <span>Male</span>
-                  </label>
-
-                  {/* Female */}
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      value="Female"
-                      {...register("gender", validationSchema.genderValidator)}
-                      className="accent-[#FF3F6C]"
-                    />
-                    <span>Female</span>
-                  </label>
-                </div>
-
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.gender?.message}
-                </p>
-              </div>
+         
 
           {/* Button */}
           <button

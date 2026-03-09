@@ -16,7 +16,7 @@ export const LoginPage = () => {
             const res = await axios.post("https://node5.onrender.com/user/login",data)
             console.log("response..",res)
             console.log("response data..",res.data)
-            if(res.status === 200 || res.status === 201){
+            if(res.status==200 || res.status==201){
             //alert("login success")
             toast.success("Login Success..")
             //check role in api response..
